@@ -9,7 +9,7 @@ interface IColor {
   updatedAt: Date;
 }
 
-export default class Color extends Entity<IColor> {
+export default class ColorEntity extends Entity<IColor> {
   get name() {
     return this.props.name;
   }
