@@ -1,7 +1,8 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface ISupplierEntity {
-  id: string;
+  id: UniqueEntityID;
   name: string;
   email: string;
   message: string;

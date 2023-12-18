@@ -1,12 +1,13 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface IProductEntity {
-  id: string;
+  id: UniqueEntityID;
   SKUMain: string;
   SKUVariant: string;
-  categoryId: string;
-  supplierId: string;
-  colorId: string;
+  categoryId: UniqueEntityID;
+  supplierId: UniqueEntityID;
+  colorId: UniqueEntityID;
   name: string;
   expense: number;
   price: number;

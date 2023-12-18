@@ -1,7 +1,8 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface INotificationEntity {
-  id: string;
+  id: UniqueEntityID;
   title: string;
   readed: boolean;
   content: string;

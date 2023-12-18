@@ -1,11 +1,12 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface IUserEntity {
-  id: string;
+  id: UniqueEntityID;
   email: string;
   password: string;
   provider: "credentials" | "google";
-  role: "string";
+  role: string;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -1,7 +1,8 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface ICategoryEntity {
-  id: string;
+  id: UniqueEntityID;
   SKUPrefix: string;
   name: string;
   createdAt: Date;

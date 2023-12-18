@@ -1,9 +1,10 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface IOrderEntity {
-  id: string;
-  productId: string;
-  supplierId: string;
+  id: UniqueEntityID;
+  productId: UniqueEntityID;
+  supplierId: UniqueEntityID;
   status: "orderned" | "received" | "canceled";
   notes: string;
   targetDate: Date;

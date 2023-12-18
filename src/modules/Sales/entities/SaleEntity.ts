@@ -1,8 +1,9 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface ISaleEntity {
-  id: string;
-  productId: string;
+  id: UniqueEntityID;
+  productId: UniqueEntityID;
   price: number;
   soldAmount: number;
   createdAt: Date;

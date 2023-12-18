@@ -1,7 +1,8 @@
 import Entity from "shared/entities/Entity";
+import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface IColor {
-  id: string;
+  id: UniqueEntityID;
   name: string;
   SKUPrefix: string;
   createdAt: Date;
