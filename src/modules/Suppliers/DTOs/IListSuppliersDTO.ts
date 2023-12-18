@@ -1,4 +1,4 @@
 export default interface IListSupplierDTO {
-  taken?: number;
+  take?: number;
   skip?: number;
 }

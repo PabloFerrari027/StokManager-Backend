@@ -1,4 +1,4 @@
 export default interface IListUsersDTO {
-  taken?: number;
+  take?: number;
   skip?: number;
 }

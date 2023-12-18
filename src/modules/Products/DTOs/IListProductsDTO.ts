@@ -1,4 +1,4 @@
 export default interface IListProductsDTO {
-  taken?: number;
+  take?: number;
   skip?: number;
 }

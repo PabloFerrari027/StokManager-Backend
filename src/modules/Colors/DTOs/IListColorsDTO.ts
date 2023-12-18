@@ -1,4 +1,4 @@
 export default interface IListColorsDTO {
-  taken?: number;
+  take?: number;
   skip?: number;
 }

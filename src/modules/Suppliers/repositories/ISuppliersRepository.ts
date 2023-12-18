@@ -2,7 +2,7 @@ import ICreateSupplierDTO from "../DTOs/ICreateSupplierDTO";
 import IDeleteSupplierDTO from "../DTOs/IDeleteSupplierDTO";
 import IFindSupplierDTO from "../DTOs/IFindSupplierDTO";
 import IUpdateSupplierDTO from "../DTOs/IUpdateSupplierDTO";
-import IListSuppliersDTO from "../DTOs/IListSupplierDTO";
+import IListSuppliersDTO from "../DTOs/IListSuppliersDTO";
 
 import SupplierEntity from "../entities/SupplierEntity";
 

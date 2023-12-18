@@ -2,7 +2,7 @@ import ICreateSaleDTO from "../DTOs/ICreateSaleDTO";
 import IDeleteSaleDTO from "../DTOs/IDeleteSaleDTO";
 import IFindSaleDTO from "../DTOs/IFindSaleDTO";
 import IUpdateSaleDTO from "../DTOs/IUpdateSaleDTO";
-import IListSalesDTO from "../DTOs/IListSaleDTO";
+import IListSalesDTO from "../DTOs/IListSalesDTO";
 
 import SaleEntity from "../entities/SaleEntity";
 

@@ -1,4 +1,4 @@
 export default interface IListOrdersDTO {
-  taken?: number;
+  take?: number;
   skip?: number;
 }

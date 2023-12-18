@@ -1,4 +1,4 @@
 export default interface IListNotificationsDTO {
-  taken?: number;
+  take?: number;
   skip?: number;
 }
