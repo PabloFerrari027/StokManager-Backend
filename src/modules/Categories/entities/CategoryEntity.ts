@@ -1,13 +1,18 @@
+import { Optional } from "shared/@types/optional";
 import Entity from "shared/entities/Entity";
 import UniqueEntityID from "shared/entities/UniqueEntityID";
 
 interface ICategoryEntity {
-  id: UniqueEntityID;
   SKUPrefix: string;
   name: string;
-  createdAt: Date;
   upadatedAt: Date;
+  createdAt: Date;
 }
+
+type CreateCategoryEntity = Optional<
+  ICategoryEntity,
+  "createdAt" | "upadatedAt"
+>;
 
 export default class CategoryEntity extends Entity<ICategoryEntity> {
   get SKUPrefix() {
@@ -16,5 +21,15 @@ export default class CategoryEntity extends Entity<ICategoryEntity> {
 
   get name() {
     return this.props.name;
+  }
+
+  static create(props: CreateCategoryEntity) {
+    const category = new CategoryEntity({
+      ...props,
+      createdAt: new Date(),
+      upadatedAt: new Date(),
+    });
+
+    return category;
   }
 }
