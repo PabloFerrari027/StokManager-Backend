@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import Container from "shared/Container";
 import { injectable } from "shared/Container/decorators";
 

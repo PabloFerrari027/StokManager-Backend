@@ -7,6 +7,7 @@
     "build": "tsc && tsc-alias",
     "dev": "tsx watch src/shared/infra/http/server.ts",
     "start": "node -r tsconfig-paths/register build/shared/infra/http/server.js",
+    "test": "vitest",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint:check": "eslint \"**/*.{ts,tsx}\"",
@@ -34,7 +35,8 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^3.1.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
   },
   "dependencies": {
     "@prisma/client": "^5.7.0",
@@ -45,6 +47,7 @@
     "tsc-alias": "^1.8.8",
     "tsx": "^4.6.2",
     "tsyringe": "^4.8.0",
+    "vite-tsconfig-paths": "^4.2.2",
     "zod": "^3.22.4"
   }
 }
