@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
-import CreateCategory from "modules/Categories/useCases/CreateCategory";
-import Container from "shared/Container";
+
 import { z } from "zod";
+
+import Container from "shared/Container";
+
+import CreateCategory from "modules/Categories/useCases/CreateCategory";
+
+import DuplicityErrorInCategoryName from "modules/Categories/useCases/errors/DuplicityErrorInCategoryName";
+import DuplicityErrorInCategorySKUPrefix from "modules/Categories/useCases/errors/DuplicityErrorInCategorySKUPrefix";
 
 export default class CategoryCreationController {
   async execute(req: Request, res: Response) {
@@ -37,6 +43,14 @@ export default class CategoryCreationController {
         updatedAt: category.updatedAt,
       });
     } catch (error) {
+      if (error instanceof DuplicityErrorInCategoryName) {
+        return res.status(406).send(error.message);
+      }
+
+      if (error instanceof DuplicityErrorInCategorySKUPrefix) {
+        return res.status(406).send(error.message);
+      }
+
       let message = "";
 
       if (error instanceof Error) message = error.message;

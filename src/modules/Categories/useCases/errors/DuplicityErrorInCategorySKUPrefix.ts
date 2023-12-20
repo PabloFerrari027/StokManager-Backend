@@ -3,7 +3,7 @@ interface IDuplicityErrorInCategoryName {
   message?: string;
 }
 
-export default class FindCategoryBySKUPrefix extends Error {
+export default class DuplicityErrorInCategorySKUPrefix extends Error {
   constructor({ SKUPrefix, message }: IDuplicityErrorInCategoryName) {
     const errorMessage =
       message ??
