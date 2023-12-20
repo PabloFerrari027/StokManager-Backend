@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import CreateCategory from "modules/Categories/useCases/CreateCategory";
-import { container } from "tsyringe";
+import Container from "shared/Container";
 import { z } from "zod";
 
 export default class CategoryCreationController {
@@ -23,11 +23,19 @@ export default class CategoryCreationController {
 
       const { data } = zodResponse;
 
-      const createCategory = container.resolve(CreateCategory);
+      const container = new Container();
 
-      const category = await createCategory.execute(data);
+      const createCategory = container.resolve<CreateCategory>(CreateCategory);
 
-      return res.json(category);
+      const { category } = await createCategory.execute(data);
+
+      return res.send({
+        id: category.id,
+        name: category.name,
+        SKUPrefix: category.SKUPrefix,
+        createdAt: category.createdAt,
+        updatedAt: category.updatedAt,
+      });
     } catch (error) {
       let message = "";
 

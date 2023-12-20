@@ -7,13 +7,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRESQL_DATABASE_URL")
 }
 
 model Categories {
   id           String     @default(uuid())   @id
   SKUPrefix    String     @default(uuid())   @unique
-	name         String     @default("") 
+	name         String     @default("")       @unique
 	createdAt    DateTime   @default(now())
   updatedAt    DateTime   @default(now())    @updatedAt
 

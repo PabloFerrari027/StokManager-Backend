@@ -9,7 +9,7 @@ import IUpdateCategoryDTO from "../DTOs/IUpdateCategoryDTO";
 import CategoryEntity from "../entities/CategoryEntity";
 
 export default interface ICategoriesRepository {
-  create(data: ICreateCategoryDTO): Promise<CategoryEntity>;
+  create(data: ICreateCategoryDTO): Promise<void>;
 
   findById(data: IFindCategoryByIDDTO): Promise<CategoryEntity | null>;
 
@@ -21,7 +21,7 @@ export default interface ICategoriesRepository {
 
   list(data: IListCategoriesDTO): Promise<CategoryEntity[]>;
 
-  update(data: IUpdateCategoryDTO): Promise<CategoryEntity>;
+  update(data: IUpdateCategoryDTO): Promise<void>;
 
   delete(data: IDeleteCategoryDTO): Promise<void>;
 }

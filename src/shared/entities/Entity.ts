@@ -5,7 +5,7 @@ export default class Entity<Props> {
   protected props: Props;
 
   get id() {
-    return this._id;
+    return this._id.id;
   }
 
   constructor(props: Props, id?: string) {

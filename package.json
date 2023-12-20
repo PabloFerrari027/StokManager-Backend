@@ -13,9 +13,9 @@
     "lint:fix": "eslint --fix \"**/*.{ts,tsx}\"",
     "docker:compose": "docker compose -f src/shared/infra/docker/docker-compose.yml up -d",
     "docker:remove": "docker-compose -f src/shared/infra/docker/docker-compose.yml down -v",
-    "prisma:generate": "npx prisma generate --schema=./src/shared/infra/orm/prisma/schema.prisma",
-    "prisma:migrate": "npx prisma migrate dev --schema=./src/shared/infra/orm/prisma/schema.prisma",
-    "prisma:migrate:deploy": "npx prisma migrate deploy --schema=./src/shared/infra/orm/prisma/schema.prisma",
+    "prisma:generate": "npx prisma generate --schema=./src/shared/infra/database/postgreSQL/schema.prisma",
+    "prisma:migrate": "npx prisma migrate dev --schema=./src/shared/infra/database/postgreSQL/schema.prisma",
+    "prisma:migrate:deploy": "npx prisma migrate deploy --schema=./src/shared/infra/database/postgreSQL/schema.prisma",
     "prisma:seed": "tsx src/shared/infra/database/postgreSQL/seed.ts"
   },
   "keywords": [],

@@ -1,8 +1,15 @@
-import { inject, injectable } from "tsyringe";
+import { inject, injectable } from "shared/Container/decorators";
+
 import ICategoriesRepository from "../repositories/ICategoriesRepository";
+
+import CategoryEntity from "../entities/CategoryEntity";
 
 interface IFindCategoryBySKUPrefix {
   SKUPrefix: string;
+}
+
+interface IFindCategoryBySKUPrefixResponse {
+  category: CategoryEntity | null;
 }
 
 @injectable()
@@ -12,11 +19,13 @@ export default class FindCategoryBySKUPrefix {
     private categoriesRepository: ICategoriesRepository,
   ) {}
 
-  async execute({ SKUPrefix }: IFindCategoryBySKUPrefix) {
-    const getCategoryByName = await this.categoriesRepository.findBySKUPrefix({
+  async execute({
+    SKUPrefix,
+  }: IFindCategoryBySKUPrefix): Promise<IFindCategoryBySKUPrefixResponse> {
+    const category = await this.categoriesRepository.findBySKUPrefix({
       SKUPrefix,
     });
 
-    return getCategoryByName;
+    return { category };
   }
 }

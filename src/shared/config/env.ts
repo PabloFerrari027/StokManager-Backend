@@ -3,6 +3,7 @@ import { z } from "zod";
 
 const envSchema = z.object({
   PORT: z.string(),
+  POSTGRESQL_DATABASE_URL: z.string(),
 });
 
 const envResolver = envSchema.safeParse(process.env);

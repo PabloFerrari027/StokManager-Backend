@@ -1,9 +1,3 @@
-import { container } from "tsyringe";
-
-interface IRegister {
-  token: string;
-}
-
 export default class InstanceEntity<T> {
   protected instance: T;
 
@@ -13,9 +7,5 @@ export default class InstanceEntity<T> {
 
   get getInstance() {
     return this.instance;
-  }
-
-  register({ token }: IRegister) {
-    container.registerInstance<T>(token, this.instance);
   }
 }

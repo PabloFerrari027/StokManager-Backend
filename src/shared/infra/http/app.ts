@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import "shared/register";
+import "shared/infra/factories/MakeAllFactories";
 import express from "express";
 import { router } from "./routes";
 

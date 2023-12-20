@@ -1,4 +1,5 @@
-import { container, inject, injectable } from "tsyringe";
+import Container from "shared/Container";
+import { inject, injectable } from "shared/Container/decorators";
 
 import CategoryEntity from "../entities/CategoryEntity";
 
@@ -15,6 +16,10 @@ interface ICreateCategory {
   name: string;
 }
 
+interface ICreateCategoryResponse {
+  category: CategoryEntity;
+}
+
 @injectable()
 export default class CreateCategory {
   constructor(
@@ -22,10 +27,12 @@ export default class CreateCategory {
     private categoriesRepository: ICategoriesRepository,
   ) {}
 
-  async execute(data: ICreateCategory) {
+  async execute(data: ICreateCategory): Promise<ICreateCategoryResponse> {
     const category = CategoryEntity.create({
       ...data,
     });
+
+    const container = new Container();
 
     const findCategoryByName = container.resolve(FindCategoryByName);
 
@@ -33,7 +40,7 @@ export default class CreateCategory {
 
     const getCategoryByName = await findCategoryByName.execute({ name });
 
-    if (getCategoryByName) {
+    if (getCategoryByName.category) {
       throw new DuplicityErrorInCategoryName({ name });
     }
 
@@ -45,10 +52,12 @@ export default class CreateCategory {
       SKUPrefix,
     });
 
-    if (getCategoryBySKUPrefix) {
+    if (getCategoryBySKUPrefix.category) {
       throw new DuplicityErrorInCategorySKUPrefix({ SKUPrefix });
     }
 
     await this.categoriesRepository.create({ data: category });
+
+    return { category };
   }
 }
