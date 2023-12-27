@@ -1,13 +1,15 @@
-import ICreateNotificationDTO from "../DTOs/ICreateNotificationDTO";
-import IDeleteNotificationDTO from "../DTOs/IDeleteNotificationDTO";
-import IFindNotificationDTO from "../DTOs/IFindNotificationDTO";
-import IListNotificationsDTO from "../DTOs/IListNotificationsDTO";
-
 import NotificationEntity from "../entities/NotificationEntity";
 
+import {
+  ICreateNotification,
+  IFindNotificationByID,
+  IListNotifications,
+  IDeleteNotification,
+} from "./types";
+
 export default interface INotificationsRepository {
-  create(data: ICreateNotificationDTO): Promise<NotificationEntity>;
-  findById(data: IFindNotificationDTO): Promise<NotificationEntity | null>;
-  list(data: IListNotificationsDTO): Promise<NotificationEntity[]>;
-  delete(data: IDeleteNotificationDTO): Promise<void>;
+  create(data: ICreateNotification): Promise<NotificationEntity>;
+  findByID(data: IFindNotificationByID): Promise<NotificationEntity | null>;
+  list(data: IListNotifications): Promise<NotificationEntity[]>;
+  delete(data: IDeleteNotification): Promise<void>;
 }

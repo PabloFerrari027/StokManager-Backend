@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import { z } from "zod";
 
-import Container from "shared/Container";
+import Container from "shared/container";
 
 import CreateCategory from "modules/Categories/useCases/CreateCategory";
 

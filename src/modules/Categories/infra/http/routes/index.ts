@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import CategoryCreationController from "../controllers/CategoryCreationController";
 
-import Container from "shared/Container";
+import Container from "shared/container";
 
 export const categoriesRouter = Router();
 

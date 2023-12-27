@@ -3,8 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import MakeCategoriesRepository from "../infra/factories/MakeCategoriesRepository";
 
 import CreateCategory from "./CreateCategory";
-import Container from "shared/Container";
-import CategoryEntity from "../entities/CategoryEntity";
+import Container from "shared/container";
 import FindCategoryByID from "./FindCategoryByID";
 
 let container: Container;

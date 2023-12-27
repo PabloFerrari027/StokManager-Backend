@@ -1,4 +1,4 @@
-import { inject, injectable } from "shared/Container/decorators";
+import { inject, injectable } from "shared/container/decorators";
 
 import ICategoriesRepository from "../repositories/ICategoriesRepository";
 

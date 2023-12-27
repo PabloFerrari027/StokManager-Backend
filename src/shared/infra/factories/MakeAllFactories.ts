@@ -1,5 +1,5 @@
-import Container from "../../Container";
-import { injectable } from "shared/Container/decorators";
+import Container from "../../container";
+import { injectable } from "shared/container/decorators";
 
 import MakeCategoriesRepository from "modules/Categories/infra/factories/MakeCategoriesRepository";
 

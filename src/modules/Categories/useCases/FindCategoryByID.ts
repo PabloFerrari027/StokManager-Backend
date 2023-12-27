@@ -1,4 +1,4 @@
-import { inject, injectable } from "shared/Container/decorators";
+import { inject, injectable } from "shared/container/decorators";
 
 import ICategoriesRepository from "../repositories/ICategoriesRepository";
 
@@ -20,7 +20,7 @@ export default class FindCategoryByID {
   ) {}
 
   async execute({ id }: IFindCategoryByID): Promise<IFindCategoryByIDResponse> {
-    const category = await this.categoriesRepository.findById({
+    const category = await this.categoriesRepository.findByID({
       id,
     });
 

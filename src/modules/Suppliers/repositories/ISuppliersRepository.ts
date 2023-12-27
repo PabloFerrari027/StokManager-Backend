@@ -1,15 +1,16 @@
-import ICreateSupplierDTO from "../DTOs/ICreateSupplierDTO";
-import IDeleteSupplierDTO from "../DTOs/IDeleteSupplierDTO";
-import IFindSupplierDTO from "../DTOs/IFindSupplierDTO";
-import IUpdateSupplierDTO from "../DTOs/IUpdateSupplierDTO";
-import IListSuppliersDTO from "../DTOs/IListSuppliersDTO";
-
 import SupplierEntity from "../entities/SupplierEntity";
+import {
+  ICreateSupplier,
+  IFindSupplier,
+  IListSuppliers,
+  IUpdateSupplier,
+  IDeleteSupplier,
+} from "./types";
 
 export default interface ISuppliersRepository {
-  create(data: ICreateSupplierDTO): Promise<SupplierEntity>;
-  findById(data: IFindSupplierDTO): Promise<SupplierEntity | null>;
-  list(data: IListSuppliersDTO): Promise<SupplierEntity[]>;
-  update(data: IUpdateSupplierDTO): Promise<SupplierEntity>;
-  delete(data: IDeleteSupplierDTO): Promise<void>;
+  create(data: ICreateSupplier): Promise<SupplierEntity>;
+  findByID(data: IFindSupplier): Promise<SupplierEntity | null>;
+  list(data: IListSuppliers): Promise<SupplierEntity[]>;
+  update(data: IUpdateSupplier): Promise<SupplierEntity>;
+  delete(data: IDeleteSupplier): Promise<void>;
 }

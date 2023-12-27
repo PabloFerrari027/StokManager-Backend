@@ -1,15 +1,17 @@
-import ICreateOrderDTO from "../DTOs/ICreateOrderDTO";
-import IDeleteOrderDTO from "../DTOs/IDeleteOrderDTO";
-import IFindOrderDTO from "../DTOs/IFindOrderDTO";
-import IUpdateOrderDTO from "../DTOs/IUpdateOrderDTO";
-import IListOrdersDTO from "../DTOs/IListOrdersDTO";
-
 import OrderEntity from "../entities/OrderEntity";
 
+import {
+  ICreateOrder,
+  IFindOrderByID,
+  IListOrders,
+  IUpdateOrder,
+  IDeleteOrder,
+} from "./types";
+
 export default interface IOrdersRepository {
-  create(data: ICreateOrderDTO): Promise<OrderEntity>;
-  findById(data: IFindOrderDTO): Promise<OrderEntity | null>;
-  list(data: IListOrdersDTO): Promise<OrderEntity[]>;
-  update(data: IUpdateOrderDTO): Promise<OrderEntity>;
-  delete(data: IDeleteOrderDTO): Promise<void>;
+  create(data: ICreateOrder): Promise<OrderEntity>;
+  findByID(data: IFindOrderByID): Promise<OrderEntity | null>;
+  list(data: IListOrders): Promise<OrderEntity[]>;
+  update(data: IUpdateOrder): Promise<OrderEntity>;
+  delete(data: IDeleteOrder): Promise<void>;
 }

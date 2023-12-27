@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import Container from "shared/Container";
-import { injectable } from "shared/Container/decorators";
+import Container from "shared/container";
+import { injectable } from "shared/container/decorators";
 
-import MockCategoriesRepository from "modules/Categories/infra/database/MockCategoriesRepository";
-import CategoriesRepository from "../database/CategoriesRepository";
+import MockCategoriesRepository from "modules/Categories/infra/databases/MockCategoriesRepository";
+import CategoriesRepository from "../databases/CategoriesRepository";
 
 @injectable()
 export default class MakeCategoriesRepository {

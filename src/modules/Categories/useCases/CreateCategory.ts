@@ -1,5 +1,5 @@
-import Container from "shared/Container";
-import { inject, injectable } from "shared/Container/decorators";
+import Container from "shared/container";
+import { inject, injectable } from "shared/container/decorators";
 
 import CategoryEntity from "../entities/CategoryEntity";
 
