@@ -4,38 +4,85 @@ import MakeCategoriesRepository from "../infra/factories/MakeCategoriesRepositor
 
 import CreateCategory from "./CreateCategory";
 import Container from "shared/container";
-import FindCategoryByID from "./FindCategoryByID";
+import ICategoriesRepository from "../repositories/ICategoriesRepository";
+import DuplicityErrorInCategoryName from "./errors/DuplicityErrorInCategoryName";
+import DuplicityErrorInCategorySKUPrefix from "./errors/DuplicityErrorInCategorySKUPrefix";
+import MakeAllRepositories from "shared/infra/factories/MakeAllRepositories";
 
-let container: Container;
+const container = new Container();
 let createCategory: CreateCategory;
-let findCategoryByID: FindCategoryByID;
+let categoriesRepository: ICategoriesRepository;
+let makeAllRepositories: MakeAllRepositories;
 
 beforeEach(() => {
-  container = new Container();
+  container.clear();
 
-  const makeCategoriesRepository = container.resolve(MakeCategoriesRepository);
+  makeAllRepositories = new MakeAllRepositories({ stage: "test" });
 
-  makeCategoriesRepository.execute("test");
+  categoriesRepository = makeAllRepositories.categoriesRepository;
 
   createCategory = container.resolve(CreateCategory);
-  findCategoryByID = container.resolve(FindCategoryByID);
 });
 
 describe("Category creation use case ", () => {
   it("Should not create a category with an existing name", async () => {
+    const makeCategoriesRepository = container.resolve(
+      MakeCategoriesRepository,
+    );
+
+    makeCategoriesRepository.execute("test");
+
     const { category } = await createCategory.execute({
       name: "Category",
       SKUPrefix: "CA",
     });
 
-    const getCategory = await findCategoryByID.execute({ id: category.id });
+    const getCategory = await categoriesRepository.findByID({
+      id: category.id,
+    });
 
-    expect(getCategory.category).toEqual(category);
+    expect(getCategory).toEqual(category);
   });
 
-  it("Should not edit a category with an existing name", async () => {});
+  it("Should not edit a category with an existing name", async () => {
+    const makeCategoriesRepository = container.resolve(
+      MakeCategoriesRepository,
+    );
 
-  it("Should not create a category with existing SKU's prefix", async () => {});
+    makeCategoriesRepository.execute("test");
+
+    await createCategory.execute({
+      name: "Category",
+      SKUPrefix: "CA",
+    });
+
+    await expect(() =>
+      createCategory.execute({
+        name: "Category",
+        SKUPrefix: "CB",
+      }),
+    ).rejects.toBeInstanceOf(DuplicityErrorInCategoryName);
+  });
+
+  it("Should not create a category with existing SKU's prefix", async () => {
+    const makeCategoriesRepository = container.resolve(
+      MakeCategoriesRepository,
+    );
+
+    makeCategoriesRepository.execute("test");
+
+    await createCategory.execute({
+      name: "Category 1",
+      SKUPrefix: "CA",
+    });
+
+    await expect(() =>
+      createCategory.execute({
+        name: "Category 2",
+        SKUPrefix: "CA",
+      }),
+    ).rejects.toBeInstanceOf(DuplicityErrorInCategorySKUPrefix);
+  });
 
   it("Should not edit a category with existing SKU's prefix", async () => {});
 

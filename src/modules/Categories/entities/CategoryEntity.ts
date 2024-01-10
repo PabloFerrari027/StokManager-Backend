@@ -33,8 +33,8 @@ export default class CategoryEntity extends Entity<ICategoryEntity> {
   static create(props: CreateCategoryEntity) {
     const category = new CategoryEntity({
       ...props,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: props.createdAt || new Date(),
+      updatedAt: props.updatedAt || new Date(),
     });
 
     return category;

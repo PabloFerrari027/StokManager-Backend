@@ -4,18 +4,31 @@ import { injectable } from "shared/container/decorators";
 
 import MockCategoriesRepository from "modules/Categories/infra/databases/MockCategoriesRepository";
 import CategoriesRepository from "../databases/CategoriesRepository";
+import ICategoriesRepository from "modules/Categories/repositories/ICategoriesRepository";
 
 @injectable()
 export default class MakeCategoriesRepository {
-  execute(stage: "test" | "production" = "production") {
+  protected repository: ICategoriesRepository | null;
+
+  constructor() {
+    this.repository = null;
+  }
+
+  execute(stage: "test" | "production" = "production"): ICategoriesRepository {
     switch (stage) {
       case "test": {
         const container = new Container();
 
+        const mockCategoriesRepository = container.resolve(
+          MockCategoriesRepository,
+        );
+
         container.register({
           token: "CategoriesRepository",
-          instance: MockCategoriesRepository,
+          instance: mockCategoriesRepository,
         });
+
+        this.repository = container.resolve(MockCategoriesRepository);
 
         break;
       }
@@ -23,18 +36,22 @@ export default class MakeCategoriesRepository {
       case "production": {
         const container = new Container();
 
+        const categoriesRepository = container.resolve(CategoriesRepository);
+
         container.register({
           token: "CategoriesRepository",
-          instance: CategoriesRepository,
+          instance: categoriesRepository,
         });
+
+        this.repository = container.resolve(CategoriesRepository);
 
         break;
       }
 
       default:
-        break;
+        throw new Error("Unsupported");
     }
 
-    return;
+    return this.repository;
   }
 }

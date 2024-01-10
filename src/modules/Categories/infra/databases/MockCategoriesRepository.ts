@@ -10,11 +10,11 @@ import {
   IListCategories,
   IDeleteCategory,
 } from "modules/Categories/repositories/types";
-import { injectable } from "shared/container/decorators";
+import { singleton } from "shared/container/decorators";
 
-@injectable()
+@singleton()
 export default class MockCategoriesRepository implements ICategoriesRepository {
-  public categories: CategoryEntity[] = [];
+  protected categories: CategoryEntity[] = [];
 
   public async create({ data }: ICreateCategory) {
     this.categories.push(data);
@@ -26,45 +26,85 @@ export default class MockCategoriesRepository implements ICategoriesRepository {
     this.categories[index] = data;
   }
 
-  public async findByID({ id }: IFindCategoryByID) {
-    const response = this.categories.find((i) => i.id === id) || null;
+  public async findByID(params: IFindCategoryByID) {
+    const response = this.categories.find((i) => i.id === params.id) || null;
 
     if (!response) return null;
 
-    const category = CategoryEntity.create(response);
+    const { id, SKUPrefix, createdAt, name, updatedAt } = response;
+
+    const category = new CategoryEntity(
+      {
+        SKUPrefix,
+        createdAt,
+        name,
+        updatedAt,
+      },
+      id,
+    );
 
     return category;
   }
 
-  public async findByName({
-    name,
-  }: IFindCategoryByName): Promise<CategoryEntity | null> {
-    const response = this.categories.find((i) => i.name === name) || null;
-
-    if (!response) return null;
-
-    const category = CategoryEntity.create(response);
-
-    return category;
-  }
-
-  public async findBySKUPrefix({
-    SKUPrefix,
-  }: IFindCategoryBySKUPrefix): Promise<CategoryEntity | null> {
+  public async findByName(
+    params: IFindCategoryByName,
+  ): Promise<CategoryEntity | null> {
     const response =
-      this.categories.find((i) => i.SKUPrefix === SKUPrefix) || null;
+      this.categories.find((i) => i.name === params.name) || null;
 
     if (!response) return null;
 
-    const category = CategoryEntity.create(response);
+    const { id, SKUPrefix, createdAt, name, updatedAt } = response;
+
+    const category = new CategoryEntity(
+      {
+        SKUPrefix,
+        createdAt,
+        name,
+        updatedAt,
+      },
+      id,
+    );
+
+    return category;
+  }
+
+  public async findBySKUPrefix(
+    params: IFindCategoryBySKUPrefix,
+  ): Promise<CategoryEntity | null> {
+    const response =
+      this.categories.find((i) => i.SKUPrefix === params.SKUPrefix) || null;
+
+    if (!response) return null;
+
+    const { id, SKUPrefix, createdAt, name, updatedAt } = response;
+
+    const category = new CategoryEntity(
+      {
+        SKUPrefix,
+        createdAt,
+        name,
+        updatedAt,
+      },
+      id,
+    );
 
     return category;
   }
 
   public async list({ skip = 0, take = 10 }: IListCategories) {
-    return this.categories
-      .slice(skip, take)
-      .map((category) => CategoryEntity.create(category));
+    return this.categories.slice(skip, take).map(
+      ({ SKUPrefix, createdAt, id, name, updatedAt }) =>
+        new CategoryEntity(
+          {
+            SKUPrefix,
+            createdAt,
+            name,
+            updatedAt,
+          },
+          id,
+        ),
+    );
   }
 
   public async delete({ id }: IDeleteCategory) {

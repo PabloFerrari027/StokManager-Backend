@@ -43,7 +43,9 @@ export default class CategoriesRepository implements ICategoriesRepository {
 
     if (!response) return null;
 
-    const category = CategoryEntity.create(response);
+    const { id: _, ...data } = response;
+
+    const category = new CategoryEntity(data, id);
 
     return category;
   }
@@ -57,7 +59,9 @@ export default class CategoriesRepository implements ICategoriesRepository {
 
     if (!response) return null;
 
-    const category = CategoryEntity.create(response);
+    const { id, ...data } = response;
+
+    const category = new CategoryEntity(data, id);
 
     return category;
   }
@@ -71,7 +75,9 @@ export default class CategoriesRepository implements ICategoriesRepository {
 
     if (!response) return null;
 
-    const category = CategoryEntity.create(response);
+    const { id, ...data } = response;
+
+    const category = new CategoryEntity(data, id);
 
     return category;
   }
@@ -79,7 +85,9 @@ export default class CategoriesRepository implements ICategoriesRepository {
   public async list({ skip = 0, take = 100 }: IListCategories) {
     const response = await orm.postgre.categories.findMany({ take, skip });
 
-    const categories = response.map((category) => new CategoryEntity(category));
+    const categories = response.map(
+      ({ id, ...data }) => new CategoryEntity(data, id),
+    );
 
     return categories;
   }
