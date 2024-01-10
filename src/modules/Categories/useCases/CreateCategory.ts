@@ -56,7 +56,7 @@ export default class CreateCategory {
       throw new DuplicityErrorInCategorySKUPrefix({ SKUPrefix });
     }
 
-    await this.categoriesRepository.create({ data: category });
+    await this.categoriesRepository.create({ category });
 
     return { category };
   }

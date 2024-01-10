@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { InjectionToken, container } from "tsyringe";
 
 interface IRegister<T> {

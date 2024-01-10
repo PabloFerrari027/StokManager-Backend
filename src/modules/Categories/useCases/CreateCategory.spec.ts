@@ -1,7 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
-import MakeCategoriesRepository from "../infra/factories/MakeCategoriesRepository";
-
 import CreateCategory from "./CreateCategory";
 import Container from "shared/container";
 import ICategoriesRepository from "../repositories/ICategoriesRepository";
@@ -24,14 +22,8 @@ beforeEach(() => {
   createCategory = container.resolve(CreateCategory);
 });
 
-describe("Category creation use case ", () => {
+describe("Create Category", () => {
   it("Should not create a category with an existing name", async () => {
-    const makeCategoriesRepository = container.resolve(
-      MakeCategoriesRepository,
-    );
-
-    makeCategoriesRepository.execute("test");
-
     const { category } = await createCategory.execute({
       name: "Category",
       SKUPrefix: "CA",
@@ -44,13 +36,7 @@ describe("Category creation use case ", () => {
     expect(getCategory).toEqual(category);
   });
 
-  it("Should not edit a category with an existing name", async () => {
-    const makeCategoriesRepository = container.resolve(
-      MakeCategoriesRepository,
-    );
-
-    makeCategoriesRepository.execute("test");
-
+  it("Should not create a category with an existing name", async () => {
     await createCategory.execute({
       name: "Category",
       SKUPrefix: "CA",
@@ -65,12 +51,6 @@ describe("Category creation use case ", () => {
   });
 
   it("Should not create a category with existing SKU's prefix", async () => {
-    const makeCategoriesRepository = container.resolve(
-      MakeCategoriesRepository,
-    );
-
-    makeCategoriesRepository.execute("test");
-
     await createCategory.execute({
       name: "Category 1",
       SKUPrefix: "CA",
@@ -83,10 +63,4 @@ describe("Category creation use case ", () => {
       }),
     ).rejects.toBeInstanceOf(DuplicityErrorInCategorySKUPrefix);
   });
-
-  it("Should not edit a category with existing SKU's prefix", async () => {});
-
-  it("Should not edit a nonexistent category", async () => {});
-
-  it("Should not delete a nonexistent category", async () => {});
 });

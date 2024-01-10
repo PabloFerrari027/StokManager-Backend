@@ -16,14 +16,14 @@ import { singleton } from "shared/container/decorators";
 export default class MockCategoriesRepository implements ICategoriesRepository {
   protected categories: CategoryEntity[] = [];
 
-  public async create({ data }: ICreateCategory) {
-    this.categories.push(data);
+  public async create({ category }: ICreateCategory) {
+    this.categories.push(category);
   }
 
-  public async update({ data }: IUpdateCategory) {
-    const index = this.categories.findIndex((i) => i.id === data.id);
+  public async update({ category }: IUpdateCategory) {
+    const index = this.categories.findIndex((i) => i.id === category.id);
 
-    this.categories[index] = data;
+    this.categories[index] = category;
   }
 
   public async findByID(params: IFindCategoryByID) {
@@ -92,7 +92,13 @@ export default class MockCategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  public async list({ skip = 0, take = 10 }: IListCategories) {
+  public async list(data?: IListCategories) {
+    let skip = data?.skip || 0;
+
+    if (skip >= this.categories.length) skip = skip - 10;
+
+    const take = skip + (data?.take || 10);
+
     return this.categories.slice(skip, take).map(
       ({ SKUPrefix, createdAt, id, name, updatedAt }) =>
         new CategoryEntity(

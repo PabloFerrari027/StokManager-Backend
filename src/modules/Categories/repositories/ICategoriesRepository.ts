@@ -20,7 +20,7 @@ export default interface ICategoriesRepository {
     data: IFindCategoryBySKUPrefix,
   ): Promise<CategoryEntity | null>;
 
-  list(data: IListCategories): Promise<CategoryEntity[]>;
+  list(data?: IListCategories): Promise<CategoryEntity[]>;
 
   update(data: IUpdateCategory): Promise<void>;
 
